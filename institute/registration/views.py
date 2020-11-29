@@ -15,7 +15,7 @@ def application(request):
             ssc_memo=request.POST['ssc-memo'],
             inter_memo=request.POST['inter-memo']
         )
-        return HttpResponseRedirect(reverse('registration:index'))
+        return HttpResponseRedirect(reverse('institute:index'))
     return render(request, 'institute/application.html')
 
 
@@ -40,7 +40,7 @@ def student_registration(request):
                 department=dept,
                 user=user,
             )
-        return HttpResponseRedirect(reverse('college:index'))
+        return HttpResponseRedirect(reverse('institute:index'))
     return render(request, 'institute/student_registration.html')
 
 
