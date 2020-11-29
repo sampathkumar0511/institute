@@ -25,10 +25,9 @@ def student_registration(request):
         stu = StudentApp.objects.get(email=email, is_verified=True)
         user = User.objects.create_user(
             username=request.POST['username'],
-            email=request.POST['student-email'],
-            password=request.POST['password'],
+            email=request.POST['student_email'],
         )
-        dept = Department.objects.get(department_name=request.POST['dept'])
+        dept = Department.objects.get(department_name=request.POST['department_name'])
         if stu.email == user.email:
             Student_reg.objects.create(
                 student_apps=stu,
@@ -45,4 +44,7 @@ def student_registration(request):
     return render(request, 'institute/student_registration.html')
 
 
+def student_list(request, department=None):
+    st_list = Student_reg.objects.filter(department="")
+    return render(request, 'institute/student_list.html', {'st_list': st_list})
 
