@@ -21,22 +21,22 @@ def application(request):
 
 def student_registration(request):
     if request.method == "POST":
-        email = request.POST['student-email']
+        email = request.POST['student_email']
         stu = StudentApp.objects.get(email=email, is_verified=True)
         user = User.objects.create_user(
             username=request.POST['username'],
-            email=request.POST['student_email'],
+            email=request.POST['student_email']
         )
         dept = Department.objects.get(department_name=request.POST['department_name'])
         if stu.email == user.email:
             Student_reg.objects.create(
                 student_apps=stu,
-                student_name=request.POST['student-name'],
-                student_email=request.POST['student-email'],
-                student_father_name=request.POST['student-father'],
-                student_mother_name=request.POST['student-mother'],
-                student_mobile=request.POST['student-mobile'],
-                student_profile_photo=request.FILES['student-profile'],
+                student_name=request.POST['student_name'],
+                student_email=request.POST['student_email'],
+                student_father_name=request.POST['student_father_name'],
+                student_mother_name=request.POST['student_mother_name'],
+                student_mobile=request.POST['student_mobile'],
+                student_profile_photo=request.FILES['student_profile_photo'],
                 department=dept,
                 user=user,
             )
