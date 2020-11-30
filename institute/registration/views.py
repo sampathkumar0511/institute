@@ -45,9 +45,11 @@ def student_registration(request):
     return render(request, 'institute/student_registration.html')
 
 
-def student_list(request, department=False):
-    st_list = Studentreg.objects.filter(id =1)
+def student_list(request):
+    st_list = Studentreg.objects.filter(id=1)
     return render(request, 'institute/student_list.html', {'st_list': st_list})
 
 
-
+def student_data(request):
+    data = Studentreg.objects.all()
+    return render(request, 'institute/student_data.html', {'data': data})

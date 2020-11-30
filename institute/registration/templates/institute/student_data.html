@@ -1,0 +1,10 @@
+{% if data %}
+{% for i in data %}
+    {{ i.student_name }}
+    {{&nbsp;i.student_email }}
+    {{ i.student_mobile }}
+    {{ i.student_profile_photo }}
+    {{ i.department }}
+
+{% end for %}
+{% endif %}
