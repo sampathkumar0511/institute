@@ -4,10 +4,16 @@ from django.contrib.auth.models import User
 
 
 def index_view(request):
+    """
+    here we can see starting page of website
+    """
     return render(request, 'institute/index.html')
 
 
 def application(request):
+    """
+    here we can got the first student application registration
+    """
     if request.method == 'POST':
         StudentApp.objects.create(
             student_name=request.POST['student_name'],
@@ -20,6 +26,10 @@ def application(request):
 
 
 def student_registration(request):
+    """
+    we can select candidate from student application members
+    here they can register for institute registration
+    """
     if request.method == "POST":
         email = request.POST['student_email']
         stu = StudentApp.objects.get(email=email, is_verified=True)
@@ -46,10 +56,24 @@ def student_registration(request):
 
 
 def student_list(request):
-    st_list = Studentreg.objects.filter(id=1)
-    return render(request, 'institute/student_list.html', {'st_list': st_list})
+    """
+    student list accepted by management
+    """
+    data = Studentreg.objects.all()
+    return render(request, 'institute/student_list.html', {'data': data})
+
+
+def department_data(request):
+    """
+    here we can get department wise student list
+    """
+    st_list = Studentreg.objects.values('department')
+    return render(request, 'institute/department.html', {'st_list': st_list})
 
 
 def student_data(request):
+    """
+    all students list which are accepted by management
+    """
     data = Studentreg.objects.all()
     return render(request, 'institute/student_data.html', {'data': data})
