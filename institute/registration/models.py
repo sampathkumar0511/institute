@@ -20,7 +20,7 @@ class StudentApp(models.Model):
         return self.student_name
 
 
-class Student_reg(models.Model):
+class Studentreg(models.Model):
     student_apps = models.OneToOneField(StudentApp, on_delete=models.CASCADE)
     student_name = models.CharField(max_length=100)
     student_email = models.EmailField()

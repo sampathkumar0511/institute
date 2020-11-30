@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
-from .models import Department, StudentApp, Student_reg
+from .models import Department, StudentApp, Studentreg
 from django.contrib.auth.models import User
 
 
@@ -15,7 +15,7 @@ def application(request):
             ssc_memo=request.POST['ssc-memo'],
             inter_memo=request.POST['inter-memo']
         )
-        return HttpResponseRedirect(reverse('institute:index'))
+        return HttpResponseRedirect(reverse('registration:index'))
     return render(request, 'institute/application.html')
 
 
@@ -25,11 +25,12 @@ def student_registration(request):
         stu = StudentApp.objects.get(email=email, is_verified=True)
         user = User.objects.create_user(
             username=request.POST['username'],
+            password=request.POST['password'],
             email=request.POST['student_email']
         )
-        dept = Department.objects.get(department_name=request.POST['department_name'])
+        dept = Department.objects.create(department_name=request.POST['department_name'])
         if stu.email == user.email:
-            Student_reg.objects.create(
+            Studentreg.objects.create(
                 student_apps=stu,
                 student_name=request.POST['student_name'],
                 student_email=request.POST['student_email'],
@@ -44,7 +45,9 @@ def student_registration(request):
     return render(request, 'institute/student_registration.html')
 
 
-def student_list(request, department=None):
-    st_list = Student_reg.objects.filter(department="")
+def student_list(request, department=False):
+    st_list = Studentreg.objects.filter(id =1)
     return render(request, 'institute/student_list.html', {'st_list': st_list})
+
+
 
